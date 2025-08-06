@@ -1,0 +1,6 @@
+            <div class="form-group">
+                <label class="col-md-2 control-label">{{titleName}}：</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" placeholder="" name="{{columnName}}" >{{$vo->{{columnName}} ?? ''}}</textarea>
+                </div>
+            </div>

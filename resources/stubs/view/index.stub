@@ -1,0 +1,80 @@
+@extends('admin.base.base')
+
+@section('content')
+    <div class="panel panel-default">
+        <div class="panel-heading" >
+            <fieldset class="">
+                <legend>搜索框</legend>
+                <form action="" method="get" enctype="multipart/form-data" class="form-horizontal form-sm">
+                    <div class="form-group">
+                        <label for="keyword" class="col-sm-1 control-label">关键字</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="keyword" name="keyword" value="{{request()->get('keyword')}}" placeholder="关键字">
+                        </div>
+                        <label for="" class="col-sm-1 control-label">状态</label>
+                        <div class="col-sm-2">
+                            <select class="select2" name="status" >
+                                <option value="">审核状态</option>
+                                <option value="-1">已拒绝</option>
+                                <option value="0">审核中</option>
+                                <option value="1">已同意</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-3 col-sm-offset-1">
+                            <input type="submit" class="btn btn-sm btn-primary" value="搜索">
+                            <a class="btn btn-sm btn-white" href="create">添加</a>
+                        </div>
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+        <div class="panel-body">
+            <div class="table-responsive">
+                <table class="table table-condensed table-hover table-bordered text-nowrap table-scroll">
+                    <thead>
+                    <tr>
+{{th}}
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach ($list as $key => $vo)
+                        <tr>
+{{--                            <td>{{$list->currentPage() * $list->perPage() - $list->perPage() + $key + 1}}</td> --}}
+
+{{td}}
+
+                            <td>
+                                <a href="update?id={{$vo->id}}" style="margin-right: 3px;"><i class="fa fa-pencil"></i>编辑</a>
+                                <a href="delete?id={{$vo->id}}" style="margin-right: 3px;" class="text-danger" onclick="if(confirm('确定删除?')==false)return false;">
+                                    <i class="fa fa-trash-o"></i>删除
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <div style="margin-left: -5px;">
+                {{$list->links()}}
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready(function() {
+            //$("[name='category_id']").find("[value='{{request()->get('category_id')}}']").attr("selected", true);
+            $('.select2').select2({
+                minimumResultsForSearch: -1,
+                width: '100%',
+            });
+        })
+    </script>
+@endsection
+
+@include('admin.public.switch')

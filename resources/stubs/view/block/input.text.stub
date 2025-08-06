@@ -1,0 +1,6 @@
+            <div class="form-group">
+                <label class="col-md-2 control-label"><span>*</span>{{titleName}}：</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" placeholder="{{titleName}}" name="{{columnName}}" value="{{$vo->{{columnName}} ?? ''}}"  required>
+                </div>
+            </div>

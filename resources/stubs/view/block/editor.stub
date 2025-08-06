@@ -1,0 +1,10 @@
+            <div class="form-group">
+                <label class="col-md-2 control-label">内容：</label>
+                <div class="col-sm-6">
+                    <div id="editor—wrapper">
+                        <div id="toolbar-container"><!-- 工具栏 --></div>
+                        <div id="editor-container"><!-- 编辑器 --></div>
+                    </div>
+                    <input type="hidden" placeholder="" name="content" id="container" value="{{$vo->content ?? ''}}">
+                </div>
+            </div>

@@ -1,0 +1,10 @@
+            <div class="form-group">
+                <label class="col-md-2 control-label">{{titleName}}：</label>
+                <div class="col-sm-6">
+                    <select name="{{columnName}}" class="form-control">
+                        <option value="">请选择分类</option>
+                        <option value="1">选项1</option>
+                        <option value="2">选项2</option>
+                    </select>
+                </div>
+            </div>

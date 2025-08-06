@@ -1,0 +1,84 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Models\{{name}}Model;
+use Illuminate\Http\Request;
+
+class {{name}}Controller extends AdminBaseController
+{
+
+    /**
+     * 列表
+     *
+     * @param Request $request
+     * @return mixed
+     */
+   public function indexAction(Request $request)
+    {
+        $list = {{name}}Model::query()
+            ->orderBy('id', 'DESC')
+            ->paginate()
+            ->withQueryString();
+        return $this->view('{{viewName}}.index', [
+            'list' => $list
+        ]);
+    }
+
+    /**
+     * 编辑
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function updateAction(Request $request)
+    {
+        $id = $request->get('id');
+        $vo = {{name}}Model::find($id);
+        if (!$vo) {
+            return $this->error("内容不存在", '/{{viewName}}/index');
+        }
+
+        return $this->view('{{viewName}}.update', [
+            'vo' => $vo
+        ]);
+    }
+
+    /**
+     * 添加
+     *
+     * @return mixed
+     */
+    public function createAction()
+    {
+        return $this->view('{{viewName}}.update');
+    }
+
+    /**
+     * 保存
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function saveAction(Request $request)
+    {
+        $id = $request->get('id');
+        $vo = $id ? {{name}}Model::find($id) : null;
+        $param = $request->all();
+        $vo ? $vo->update($param) : {{name}}Model::create($param);
+        return $this->success('操作成功', '/{{viewName}}/index');
+    }
+
+    /**
+     * 删除
+     *
+     * @param Request $request
+     * @return mixed
+     */
+    public function deleteAction(Request $request)
+    {
+        $id = $request->get('id');
+        {{name}}Model::where('id', $id)->delete();
+        return $this->success('删除成功', '/{{viewName}}/index');
+    }
+}

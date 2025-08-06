@@ -1,0 +1,3 @@
+                            <td>
+                                <img src="{{$vo->{{columnName}}}}" width="35px;" height="35px;" class="index-img-hover" style="border-radius: 10%;"/>
+                            </td>

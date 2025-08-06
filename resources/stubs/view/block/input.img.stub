@@ -1,0 +1,7 @@
+            <div class="form-group">
+                <label class="col-md-2 control-label">{{titleName}}：</label>
+                <div class="col-sm-6">
+                    <input id="{{columnName}}Id" type="file" class="file-loading">
+                    <input type="hidden" id="{{columnName}}" placeholder="图片" name="picurl" value="{{$vo->{{columnName}} ?? ''}}" >
+                </div>
+            </div>
