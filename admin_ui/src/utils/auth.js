@@ -1,11 +1,3 @@
-/*
- * @Description:
- * @version:
- * @Author: smy
- * @Date: 2023-09-26 10:28:23
- * @LastEditors: smy
- * @LastEditTime: 2023-09-26 15:54:47
- */
 import Cookies from "js-cookie";
 
 const TokenKey = "AdminAuthorization";

@@ -64,11 +64,6 @@ export default {
     }
   },
   methods: {
-    openDownload() {
-      this.show = true
-      this.$store.commit('app/SET_SHOWBOX',false)
-      console.log(this.$store.state.app.showBox ,'数据')
-    },
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
     },

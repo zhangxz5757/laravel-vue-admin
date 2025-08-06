@@ -1,11 +1,3 @@
-/*
- * @Description: 入口文件
- * @version:
- * @Author: smy
- * @Date: 2023-09-26 10:28:23
- * @LastEditors: smy
- * @LastEditTime: 2023-10-11 13:52:01
- */
 import Vue from 'vue'
 
 import Cookies from 'js-cookie'
@@ -26,12 +18,12 @@ import './icons' // icon
 import './permission' // permission control
 import './utils/error-log' // error log
 import * as filters from './filters' // global filters
-
 import { returnPrev } from '@/mixin/returnPrev'
+import VueDnD from 'awe-dnd'
 
 import { modalSure } from "@/libs/public";
 import { modalSureDelete } from "@/libs/public";
-import VueDnD from 'awe-dnd'
+
 
 Vue.use(VueDnD)
 Vue.mixin(returnPrev)

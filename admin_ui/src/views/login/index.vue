@@ -167,7 +167,7 @@ export default {
     handleLogin() {
       console.log(this.loginForm,'点击11111111')
       this.$refs.loginForm.validate((valid) => {
-        console.log(valid,'点击')
+        console.log(this.redirect,'点击')
         if (valid) {
           this.loading = true
           this.$store

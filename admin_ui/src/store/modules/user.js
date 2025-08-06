@@ -6,7 +6,7 @@ const state = {
   token: getToken(),
   username: '',
   avatar: '',
-  is_super: 0,
+  is_super: '',
   nickname: ''
 }
 
