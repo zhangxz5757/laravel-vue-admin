@@ -27,7 +27,7 @@ class AuthController extends BaseController
             'username' => 'required',
             'password' => 'required',
             'key'      => 'required',
-            'code'     => 'required'
+            'code'     => 'required',
         ], [
             'username' => '请输入账号',
             'password' => '请输入密码',

@@ -6,6 +6,7 @@ use App\Exceptions\ApiException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Illuminate\Support\Str;
 
 class BaseController extends Controller
 {
@@ -64,6 +65,7 @@ class BaseController extends Controller
      */
     public function action($action, Request $request)
     {
+        $action = Str::camel($action);
         $method = $action . 'Action';
         if (method_exists(get_called_class(), $method)) {
             return $this->$method($request);

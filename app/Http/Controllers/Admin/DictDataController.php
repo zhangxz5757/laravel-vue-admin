@@ -29,16 +29,12 @@ class DictDataController extends BaseController
     public function indexAction(Request $request)
     {
         $paginate = ThisTable::query()
+            ->when($k = $request->get('keyword'), fn ($q) => $q->where('label', 'like', "%{$k}%"))
             ->where('alias', $request->get('alias'))
             ->orderBy('sort_id')
-            ->select([
-                'id', 'label', 'value', 'alias', 'sort_id', 'status', 'created_at as create_time'
-            ])
-            ->get();
+            ->paginate();
 
-        return $this->jsonSuccess([
-            'list' => $paginate
-        ]);
+        return $this->jsonSuccess($paginate);
     }
 
 

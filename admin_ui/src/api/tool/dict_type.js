@@ -1,6 +1,6 @@
 import request from '@/utils/request'
 
-export function getCodeList(data) {
+export function getDictTypeList(data) {
   return request({
     url: '/admin/dict_type/index',
     method: 'post',
@@ -8,7 +8,7 @@ export function getCodeList(data) {
   })
 }
 
-export function saveCode(data) {
+export function dictTypeStore(data) {
   return request({
     url: '/admin/dict_type/store',
     method: 'post',
@@ -16,34 +16,33 @@ export function saveCode(data) {
   })
 }
 
-export function getCodeDataList(data) {
+export function dictTypeDel(data) {
   return request({
-    url: '/admin/dict_data/index',
+    url: '/admin/dict_type/delete',
     method: 'post',
     data
   })
 }
 
-export function saveCodeData(data) {
+export function dictTypeInfo(data) {
   return request({
-    url: '/admin/dict_data/store',
-    method: 'post',
-    data
-  })
-}
-
-export function deleteCodeData(data) {
-  return request({
-    url: '/admin/dict_data/delete',
-    method: 'post',
-    data
-  })
-}
-
-export function codeQuery(data) {
-  return request({
-    url: '/admin/dict',
+    url: '/admin/dict_type/info',
     method: 'get',
     params: data
   })
 }
+
+export function dictTypeMaxSort() {
+  return request({
+    url: '/admin/dict_type/max-sort',
+    method: 'get',
+  })
+}
+
+export function dictTypeAll() {
+  return request({
+    url: '/admin/dict_type/all',
+    method: 'get',
+  })
+}
+

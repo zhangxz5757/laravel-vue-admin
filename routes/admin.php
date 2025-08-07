@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CommonController;
-use App\Http\Controllers\Admin\DictController;
+use App\Http\Controllers\Admin\DictTypeController;
 use App\Http\Controllers\Admin\DictDataController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\SysUserController;
@@ -46,6 +46,6 @@ Route::middleware(['auth.admin', 'sys.log'])->group(function () {
 
 
     // 字典管理
-    Route::any('/dict_type/{action}', [DictController::class, 'action']);
+    Route::any('/dict_type/{action}', [DictTypeController::class, 'action']);
     Route::any('/dict_data/{action}', [DictDataController::class, 'action']);
 });

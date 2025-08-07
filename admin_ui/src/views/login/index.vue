@@ -16,7 +16,7 @@
         <el-input
           v-model="loginForm.password"
           type="password"
-          auto-complete="off"
+          auto-complete="new-password"
           placeholder="密码"
           @keyup.enter.native="handleLogin"
         >
@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { getCodeImg, login } from "@/api/auth"
+import { getCodeImg } from "@/api/auth"
 import Cookies from "js-cookie"
 import { encrypt, decrypt } from '@/utils/jsencrypt'
 
@@ -67,8 +67,8 @@ export default {
       title: process.env.VUE_APP_TITLE,
       codeUrl: "",
       loginForm: {
-        username: "admin",
-        password: "admin123",
+        username: "",
+        password: "",
         rememberMe: false,
         code: "",
         key: ""
@@ -115,11 +115,13 @@ export default {
       const username = Cookies.get("username")
       const password = Cookies.get("password")
       const rememberMe = Cookies.get('rememberMe')
-      this.loginForm = {
-        username: username === undefined ? this.loginForm.username : username,
-        password: password === undefined ? this.loginForm.password : decrypt(password),
-        rememberMe: rememberMe === undefined ? false : Boolean(rememberMe)
+      if (username) {
+        this.loginForm.username = username
       }
+      if (password) {
+        this.loginForm.password = decrypt(password)
+      }
+
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
@@ -128,6 +130,13 @@ export default {
           this.$store
             .dispatch('user/login', this.loginForm)
             .then(() => {
+              // 是否记住密码
+              if (this.loginForm.rememberMe) {
+                Cookies.set('username', this.loginForm.username)
+                Cookies.set('password', encrypt(this.loginForm.password))
+                Cookies.set('rememberMe', 1)
+              }
+
               this.$router.push({
                 path: this.redirect || '/',
                 query: this.otherQuery
