@@ -153,7 +153,7 @@ const actions = {
             children: [
               {
                 path: 'homepage',
-                component: () => import('@/views/homePage/index'),
+                component: () => import('@/views/home/index'),
                 name: 'homepage',
                 meta: { title: '主页', icon: 'el-icon-s-home', affix: true },
               },

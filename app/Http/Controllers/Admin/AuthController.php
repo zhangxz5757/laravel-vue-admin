@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BaseController;
 use App\Models\SysUserModel;
+use App\Utils\CodeImageGenerateUtils;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -22,6 +23,19 @@ class AuthController extends BaseController
      */
     public function loginAction(Request $request)
     {
+        $vData = $this->validate($request, [
+            'username' => 'required',
+            'password' => 'required',
+            'key'      => 'required',
+            'code'     => 'required',
+        ], [
+            'username' => '请输入账号',
+            'password' => '请输入密码',
+            'code'     => '请输入验证码',
+        ]);
+        if (!captcha_api_check($vData['code'], $vData['key'])) {
+            return $this->jsonFail(422, '验证码验证失败');
+        }
         $admin = SysUserModel::query()->where('username', $request->get('username'))->first();
 
         if (!$admin) {
@@ -42,9 +56,18 @@ class AuthController extends BaseController
         return $this->jsonSuccess([
             'token' => 'Bearer ' . $token
         ]);
-
-
     }
+
+    /**
+     *
+     *
+     * @return void
+     */
+    public function loginCode()
+    {
+        return $this->jsonSuccess(app('captcha')->create('default', true));
+    }
+
 
     /**
      * 登出
@@ -55,7 +78,7 @@ class AuthController extends BaseController
     {
         Auth::guard('admin')->logout();
         // 清理菜单缓存
-        Cache::forget('menu:'. Auth::guard('admin')->id());
+        Cache::forget('menu:' . Auth::guard('admin')->id());
         return redirect(route('admin.login'));
     }
 

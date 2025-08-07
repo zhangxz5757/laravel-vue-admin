@@ -178,6 +178,9 @@ return [
         // jwt
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
+
+        // 验证码图片
+        \Mews\Captcha\CaptchaServiceProvider::class,
     ],
 
     /*
@@ -230,6 +233,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
     ],
 
 ];

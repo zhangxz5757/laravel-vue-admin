@@ -33,10 +33,9 @@ const mutations = {
 
 const actions = {
   // user login
-  login({ commit }, userInfo) {
-    const { username, password } = userInfo
+  login({ commit }, loginForm) {
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }, { headers: { showLoading: false } })
+      login(loginForm, { headers: { showLoading: false } })
         .then(response => {
           if (response.code != 200) {
             reject()

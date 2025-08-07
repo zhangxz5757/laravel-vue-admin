@@ -1,15 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
+ Source Server         : 192.168.110.241
  Source Server Type    : MySQL
  Source Server Version : 80036 (8.0.36)
- Source Schema         : laravel_admin
+ Source Host           : 192.168.110.241:3306
+ Source Schema         : longcai_admin
 
  Target Server Type    : MySQL
  Target Server Version : 80036 (8.0.36)
  File Encoding         : 65001
 
- Date: 06/08/2025 10:03:24
+ Date: 07/08/2025 14:13:10
 */
 
 SET NAMES utf8mb4;
@@ -3762,10 +3764,11 @@ COMMIT;
 DROP TABLE IF EXISTS `h_sys_dict_type`;
 CREATE TABLE `h_sys_dict_type` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `title` varchar(64) DEFAULT NULL,
+  `title` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '字典名称',
   `alias` varchar(45) DEFAULT NULL COMMENT '别名',
-  `sort_id` int DEFAULT NULL,
-  `status` tinyint DEFAULT NULL,
+  `sort_id` int DEFAULT NULL COMMENT '排序，正序',
+  `status` tinyint DEFAULT '1' COMMENT '状态 0/1 禁用/启用',
+  `remark` varchar(1024) DEFAULT NULL COMMENT '备注',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -3790,21 +3793,12 @@ CREATE TABLE `h_sys_log` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of h_sys_log
 -- ----------------------------
 BEGIN;
-INSERT INTO `h_sys_log` (`id`, `url`, `params`, `address`, `user_id`, `created_at`, `updated_at`) VALUES (1, '/admin/sys_user/index', '{\"keyword\":null,\"status\":null,\"page\":\"1\",\"per_page\":\"10\"}', NULL, 1, '2025-08-06 10:01:58', '2025-08-06 10:01:58');
-INSERT INTO `h_sys_log` (`id`, `url`, `params`, `address`, `user_id`, `created_at`, `updated_at`) VALUES (2, '/admin/sys_user/info', '{\"id\":\"1\"}', NULL, 1, '2025-08-06 10:02:00', '2025-08-06 10:02:00');
-INSERT INTO `h_sys_log` (`id`, `url`, `params`, `address`, `user_id`, `created_at`, `updated_at`) VALUES (3, '/admin/sys_role/all', '[]', NULL, 1, '2025-08-06 10:02:00', '2025-08-06 10:02:00');
-INSERT INTO `h_sys_log` (`id`, `url`, `params`, `address`, `user_id`, `created_at`, `updated_at`) VALUES (4, '/admin/sys_dept/tree', '[]', NULL, 1, '2025-08-06 10:02:00', '2025-08-06 10:02:00');
-INSERT INTO `h_sys_log` (`id`, `url`, `params`, `address`, `user_id`, `created_at`, `updated_at`) VALUES (5, '/admin/sys_user/store', '{\"id\":1,\"avatar\":\"https:\\/\\/longcai-bdh.oss-cn-beijing.aliyuncs.com\\/huayuan\\/%E5%87%A4%E7%9C%BC1.webp\",\"username\":\"admin\",\"nickname\":\"\\u7ba1\\u7406\\u5458\",\"mobile\":\"18645063636\",\"department_id\":38,\"status\":1,\"is_super\":1,\"created_at\":\"2022-04-01T02:40:37.000000Z\",\"updated_at\":\"2024-07-15T07:22:43.000000Z\",\"deleted_at\":null,\"role_ids\":[],\"password\":\"1234.com\"}', NULL, 1, '2025-08-06 10:02:08', '2025-08-06 10:02:08');
-INSERT INTO `h_sys_log` (`id`, `url`, `params`, `address`, `user_id`, `created_at`, `updated_at`) VALUES (6, '/admin/sys_user/index', '{\"keyword\":null,\"status\":null,\"page\":\"1\",\"per_page\":\"10\"}', NULL, 1, '2025-08-06 10:02:08', '2025-08-06 10:02:08');
-INSERT INTO `h_sys_log` (`id`, `url`, `params`, `address`, `user_id`, `created_at`, `updated_at`) VALUES (7, '/admin/login', '{\"username\":\"admin\",\"password\":\"1234.com\"}', NULL, NULL, '2025-08-06 10:02:16', '2025-08-06 10:02:16');
-INSERT INTO `h_sys_log` (`id`, `url`, `params`, `address`, `user_id`, `created_at`, `updated_at`) VALUES (8, '/admin/auth/info', '{\"token\":\"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC8xMjcuMC4wLjE6ODAwMFwvYWRtaW5cL2xvZ2luIiwiaWF0IjoxNzU0NDQ1NzM2LCJleHAiOjE3NTUwNTA1MzYsIm5iZiI6MTc1NDQ0NTczNiwianRpIjoieDdYYzBEVDlZRE01anBBQiIsInN1YiI6MSwicHJ2IjoiYzE0MjZiMzQyY2Q5YjUyMDQ3MWMzNTZmOTZlNjEwNmZkMjI2MTgzZCJ9.2TbmHah5xYPUdSJMeU3_wA7-A8mlOeK7luvqsp5d4_0\"}', NULL, 1, '2025-08-06 10:02:16', '2025-08-06 10:02:16');
-INSERT INTO `h_sys_log` (`id`, `url`, `params`, `address`, `user_id`, `created_at`, `updated_at`) VALUES (9, '/admin/home/index', '[]', NULL, 1, '2025-08-06 10:02:16', '2025-08-06 10:02:16');
 COMMIT;
 
 -- ----------------------------
@@ -3827,39 +3821,21 @@ CREATE TABLE `h_sys_menu` (
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=104 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- ----------------------------
 -- Records of h_sys_menu
 -- ----------------------------
 BEGIN;
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (2, 'project_manage', '/project/index', 'project_manage', '项目信息', 0, 1, 'el-icon-folder-opened', 1, 0, 0, '2023-12-07 15:28:39', '2024-01-29 14:52:14', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (3, 'System', 'Layout', 'system', '系统管理', 0, 0, 'el-icon-s-tools', 1, 20, 0, '2023-12-07 16:59:39', '2025-07-30 16:05:33', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (4, 'SysRole', '/system/role/index', 'system/role', '角色管理', 0, 3, 'el-icon-s-custom', 0, 2, 0, '2023-12-07 17:02:28', '2025-07-31 16:21:51', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (8, 'menu', '/system/menu/index', 'menu', '菜单管理', 0, 3, 'el-icon-s-order', 1, 6, 0, '2023-12-07 17:06:53', '2025-07-30 16:25:01', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (27, 'users', '/users/index', 'user_index', '用户列表', 0, 26, 'el-icon-user', 1, 1, 0, '2023-12-08 10:32:24', '2024-04-01 16:38:20', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (30, 'AgreementIndex', '/agreement/index', 'page_index', '关于我们', 0, 29, 'el-icon-star-off', 1, 3, 0, '2023-12-08 10:36:50', '2024-01-29 15:53:59', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (31, 'NewsIndex', '/news/news', 'news_index', '新闻动态', 0, 29, 'el-icon-data-line', 1, 4, 0, '2023-12-08 10:37:15', '2024-02-18 14:40:01', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (32, 'NewsTypeIndex', '/news_type/index', 'news_type', '公司动态分类', 1, 29, 'el-icon-user', 1, 5, 0, '2023-12-08 10:37:49', '2024-01-29 15:54:14', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (38, 'banner', '/banner/index', '/banner/index', '轮播管理', 0, 29, 'el-icon-picture-outline', 1, 1, 0, '2023-12-08 10:43:34', '2024-04-01 17:32:45', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (45, 'DictNav', '/dict/index', '/dict/index', '配置管理', 0, 79, 'el-icon-s-management', 1, 100, 0, '2023-12-12 10:24:52', '2024-06-13 10:17:43', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (46, 'DictDetail', '/dict/detail', '/dict/detail', '字典详情管理', 1, 79, 'el-icon-s-order', 1, 8, 0, '2023-12-12 11:13:01', '2024-06-13 10:17:51', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (67, 'SysUser', '/system/user/index', '/sys-user/index', '用户管理', 0, 3, 'el-icon-user-solid', 1, 3, 0, '2024-03-26 17:07:10', '2025-07-31 10:28:32', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (68, 'SysDepartment', '/system/department/index', '/department/index', '部门管理', 0, 3, 'el-icon-s-grid', 1, 4, 0, '2024-06-05 08:51:19', '2025-07-31 13:14:11', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (70, 'HelpCenterIndex', '/help_center/index', '/help_center/index', '帮助中心', 0, 69, 'el-icon-s-flag', 1, 1, 0, '2024-06-05 14:04:42', '2024-06-05 14:04:42', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (72, 'PlanIndex', '/plan/index', '/plan/index', '工作计划', 0, 71, 'el-icon-postcard', 1, 1, 0, '2024-06-06 09:00:20', '2024-06-06 09:00:20', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (74, 'MyTask', '/task/index', '/task/index', '我的任务', 0, 73, 'el-icon-star-on', 1, 1, 0, '2024-06-07 17:12:56', '2024-06-11 14:36:19', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (75, 'MyHelp', '/help_center/index', '/help_center/index', '帮助他人', 0, 73, 'el-icon-phone', 1, 2, 0, '2024-06-07 17:13:39', '2024-07-02 09:16:10', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (77, 'MyPublishedHelp', '/help_center/published', '/help_center/published', '需要帮助', 0, 76, 'el-icon-s-flag', 1, 3, 0, '2024-06-11 11:13:37', '2024-07-02 09:16:23', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (78, 'MyTaskOwner', '/task/published', '/task/published', '他人任务', 0, 76, 'el-icon-star-off', 1, 2, 0, '2024-06-12 09:40:44', '2024-09-23 16:51:54', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (80, 'CustomerIndex', '/customer/index', '/customer/index', '客户管理', 0, 79, 'el-icon-user', 1, 1, 0, '2024-06-12 11:15:09', '2024-07-02 09:15:05', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (82, 'kpiIndex', '/kpi/index', '/kpi/index', '指标管理', 0, 81, 'el-icon-s-grid', 1, 10, 0, '2024-06-20 09:06:09', '2024-06-20 09:06:24', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (83, 'KpiUser', '/kpi_user/index', '/kpi_user/index', '我负责的', 0, 81, 'el-icon-s-custom', 1, 5, 0, '2024-06-20 10:18:37', '2024-07-16 08:53:13', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (84, 'MyKpi', '/kpi_user/my', '/kpi_user/my', '我的考核', 0, 81, 'el-icon-s-custom', 1, 1, 0, '2024-06-22 15:20:33', '2024-06-22 15:20:33', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (85, 'FollowIndex', '/customer_follow/index', '/customer_follow/index', '跟进记录', 0, 79, 'el-icon-s-flag', 1, 2, 0, '2024-06-26 10:28:41', '2024-06-26 10:28:41', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (86, 'KpiUserScore', '/kpi_user/score', '/kpi_user/score', '我打分的', 0, 81, 'el-icon-s-opportunity', 1, 3, 0, '2024-07-16 08:53:54', '2024-07-16 08:53:54', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (87, 'KupUserPublish', '/kpi_user/published', '/kpi_user/published', '我下达的', 0, 81, 'el-icon-s-promotion', 1, 4, 0, '2024-07-16 08:54:29', '2024-07-16 08:54:29', NULL);
-INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (88, 'KpiUserAll', '/kpi_user/all', '/kpi_user/all', '考核管理', 0, 81, 'el-icon-s-unfold', 1, 20, 0, '2024-07-16 17:13:58', '2024-07-16 17:13:58', NULL);
+INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (1, 'System', 'Layout', 'system', '系统管理', 0, 0, 'el-icon-s-tools', 1, 20, 0, '2023-12-07 16:59:39', '2025-08-07 10:32:03', NULL);
+INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (2, 'SysRole', '/system/role/index', '/system/role', '角色管理', 0, 1, 'el-icon-s-custom', 1, 2, 0, '2023-12-07 17:02:28', '2025-08-07 10:32:25', NULL);
+INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (3, 'SysUser', '/system/user/index', '/sys-user/index', '用户管理', 0, 1, 'el-icon-user-solid', 1, 3, 0, '2024-03-26 17:07:10', '2025-08-07 10:32:35', NULL);
+INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (4, 'SysDepartment', '/system/department/index', '/department/index', '部门管理', 0, 1, 'el-icon-s-grid', 1, 4, 0, '2024-06-05 08:51:19', '2025-08-07 10:32:48', NULL);
+INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (5, 'menu', '/system/menu/index', 'menu', '菜单管理', 0, 1, 'el-icon-s-order', 1, 6, 0, '2023-12-07 17:06:53', '2025-08-07 10:32:55', NULL);
+INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (100, 'Tools', 'Layout', NULL, '系统工具', 0, 0, 'el-icon-star-off', 1, 99, 0, '2025-08-06 10:55:47', '2025-08-07 10:33:11', NULL);
+INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (101, 'FormBuild', '/tools/build/index', '/build/index', '表单构建', 0, 100, 'el-icon-fork-spoon', 1, 1, 0, '2025-08-06 10:59:01', '2025-08-07 13:49:14', NULL);
+INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (102, 'DictType', '/tools/dict_type/index', '/dict_type/index', '字典管理', 0, 100, 'el-icon-s-management', 1, 100, 0, '2023-12-12 10:24:52', '2025-08-07 13:42:36', NULL);
+INSERT INTO `h_sys_menu` (`id`, `name`, `component`, `path`, `title`, `hidden`, `pid`, `icon`, `affix`, `sort_id`, `type`, `created_at`, `updated_at`, `deleted_at`) VALUES (103, 'DictData', '/tools/dict_data/index', '/dict_data/index', '字典数据', 1, 100, 'el-icon-s-order', 1, 9999, 0, '2023-12-12 11:13:01', '2025-08-07 13:42:28', NULL);
 COMMIT;
 
 -- ----------------------------
