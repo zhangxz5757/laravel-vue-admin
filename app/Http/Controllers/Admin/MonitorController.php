@@ -17,16 +17,12 @@ class MonitorController extends BaseController
         $linfo = new \Linfo\Linfo;
         $parser = $linfo->getParser();
 
-//        dump($parser->getRam());
-//        dump(get_class_methods($parser));
         $cpu = [
             'num' => count($parser->getCPU()),
             'load_now' => $parser->getLoad()['now'] ?? '',
             'load_5' => $parser->getLoad()['5min'] ?? '',
             'load_15' => $parser->getLoad()['15min'] ?? '',
         ];
-        $mem = [];
-
         $sysLoad = $parser->getLoad();
         $sys = [
             'hostname'  => $parser->getHostname(),
