@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 
 // 登录
 Route::middleware('sys.log')->post('/login', [AuthController::class, 'loginAction']);
+Route::middleware('sys.log')->any('/image-code', [AuthController::class, 'loginCode']);
 
 
 // 公共
