@@ -12,6 +12,16 @@
         </el-select>
       </el-form-item>
 
+      <el-form-item prop="cover_url" label="封面图">
+        <upload-file
+          :showText="false"
+          :value="form.picImg"
+          :max-size="5"
+          :limit="1"
+          @fileChange="fileUploadHandler">
+        </upload-file>
+      </el-form-item>
+
       <el-form-item prop="status" label="状态">
         <el-radio v-model="form.status" :label="1">启用</el-radio>
         <el-radio v-model="form.status" :label="0">禁用</el-radio>
@@ -25,10 +35,11 @@
 import {DemoFormRule, DemoFormData} from "../options";
 import {deepClone} from "@/utils";
 import {demoType} from "@/api/demo";
+import UploadFile from "@/components/Upload/UploadFile.vue";
 
 export default {
   name: "AddForm",
-  components: {},
+  components: {UploadFile},
   props: {
     rowData: {
       type: Object,
@@ -41,7 +52,7 @@ export default {
     return {
       form: {},
       rules: DemoFormRule,
-      typeList: []
+      typeList: [],
     }
   },
 
@@ -62,6 +73,16 @@ export default {
         this.query.type_list = res.data.list
       })
     },
+
+    /**
+     * 文件上传后的event
+     *
+     * @param fileList
+     */
+    fileUploadHandler(fileList)
+    {
+      this.form.cover_url = fileList.length > 0 ? fileList[0].url : null
+    }
   }
 }
 </script>
