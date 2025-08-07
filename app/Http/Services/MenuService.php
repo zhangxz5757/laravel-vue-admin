@@ -4,7 +4,6 @@ namespace App\Http\Services;
 
 use App\Models\SysMenuModel;
 use App\Utils\TreeUtils;
-use Illuminate\Support\Facades\Cache;
 
 class MenuService
 {
