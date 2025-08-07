@@ -17,7 +17,17 @@
 # npm run build:prod ## 打包
 ```
 
-
+## 系统截图
+#### 登录页
+![登录页面](https://github.com/zhangxz5757/laravel-vue-admin/blob/develop/example/images/login.png?raw=true])
+#### 系统菜单
+![系统菜单](https://github.com/zhangxz5757/laravel-vue-admin/blob/develop/example/images/menu.png?raw=true])
+#### 部门管理
+![部门管理](https://github.com/zhangxz5757/laravel-vue-admin/blob/develop/example/images/department.png?raw=true])
+#### 表单构建
+![表单构建](https://github.com/zhangxz5757/laravel-vue-admin/blob/develop/example/images/form.png?raw=true])
+#### 系统监控
+![系统监控](https://github.com/zhangxz5757/laravel-vue-admin/blob/develop/example/images/monitor.png?raw=true])
 
 ## 默认账户/超级管理员
 ### 账号：admin
