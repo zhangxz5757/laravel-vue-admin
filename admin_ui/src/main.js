@@ -23,10 +23,12 @@ import VueDnD from 'awe-dnd'
 
 import { modalSure } from "@/libs/public";
 import { modalSureDelete } from "@/libs/public";
-
+import plugins from './plugins' // plugins
 
 Vue.use(VueDnD)
 Vue.mixin(returnPrev)
+
+Vue.use(plugins)
 
 Vue.use(Element, {
   size: Cookies.get('size') || 'mini' // set element-ui default size
