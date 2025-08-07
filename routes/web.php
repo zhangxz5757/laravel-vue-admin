@@ -13,10 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\IndexController::class, 'index']);
+Route::get('/', [\App\Http\Controllers\Api\HomeController::class, 'indexAction']);
 
-//二维码
-Route::get('/qrcode', [\App\Http\Controllers\QrcodeController::class, 'indexAction']);
-
-Route::get('/agreement/info', [\App\Http\Controllers\IndexController::class, 'agreement']);
-Route::get('/banner/info', [\App\Http\Controllers\IndexController::class, 'banner']);

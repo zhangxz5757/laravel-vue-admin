@@ -1,3 +1,0 @@
-                    <td>
-                        <div class="toggle toggle-primary {{$vo->{{columnName}} == 1 ? 'switch-on': 'switch-off'}}" data-id="{{$vo->id}}" data-table="{{tableName}}"></div>
-                    </td>

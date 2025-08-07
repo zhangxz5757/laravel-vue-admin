@@ -58,15 +58,6 @@
         @current-change="handleCurrentChange"
       />
     </div>
-    <!--    <el-dialog title="自定义展示" :visible.sync="customColumnDialogVisible" :show-close="false" :modal-append-to-body="false">-->
-    <!--      <el-checkbox-group v-model="columnSelectList">-->
-    <!--        <el-checkbox v-for="(item, index) in tableHead" :key="index" :checked="item.show !== false " :label="item.label" @change="handleCheckChange">{{ item.label }}</el-checkbox>-->
-    <!--      </el-checkbox-group>-->
-    <!--      <span slot="footer" class="dialog-footer">-->
-    <!--        <el-button @click="customColumnDialogVisible=false">取 消</el-button>-->
-    <!--        <el-button type="primary" @click="onSubmit">确 定</el-button>-->
-    <!--      </span>-->
-    <!--    </el-dialog>-->
   </div>
 </template>
 
@@ -210,44 +201,11 @@ export default {
       customColumnDialogVisible: false,
       columnSelectList: [],
       selectIds : []
-      // oldTableHead: this.tableHead
     }
   },
   computed: {
     list() {
       return this.tableData
-      /*return [{
-        id: 1,
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        id: 2,
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        id: 3,
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄',
-        children: [{
-          id: 31,
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          id: 32,
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }]
-      }, {
-        id: 4,
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }]*/
     },
     customHead() {
       return this.tableHead.filter(ele => ele.show !== false)
@@ -293,7 +251,6 @@ export default {
       this.$emit('handleTableHead', head_list)
       localStorage.setItem(this.routerKey, JSON.stringify({ head: head_list }))
       this.customColumnDialogVisible = false
-      // this.tableDoLayout()
     },
     tableDoLayout() {
       if (this.$refs[this.dropRef]) this.$refs[this.dropRef].doLayout()

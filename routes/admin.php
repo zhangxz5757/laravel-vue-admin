@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\CommonController;
 use App\Http\Controllers\Admin\DictTypeController;
 use App\Http\Controllers\Admin\DictDataController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\MonitorController;
 use App\Http\Controllers\Admin\SysUserController;
 use App\Http\Controllers\Admin\SysRoleController;
 use App\Http\Controllers\Admin\SysMenuController;
@@ -29,6 +30,7 @@ Route::middleware(['auth.admin', 'sys.log'])->group(function () {
     Route::any('/clean', [HomeController::class, 'cleanAction']);
     // 默认首页接口
     Route::any('/home/index', [HomeController::class, 'indexAction']);
+
 });
 
 // 系统管理相关接口
@@ -48,4 +50,5 @@ Route::middleware(['auth.admin', 'sys.log'])->group(function () {
     // 字典管理
     Route::any('/dict_type/{action}', [DictTypeController::class, 'action']);
     Route::any('/dict_data/{action}', [DictDataController::class, 'action']);
+    Route::any('/monitor/{action}', [MonitorController::class, 'action']);
 });
